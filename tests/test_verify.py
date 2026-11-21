@@ -7,7 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from support import basic_report, gate, latest_verdict, sc, small_target
+import acceptance_spec as spec
+from support import basic_report, env, gate, latest_verdict, sc, small_target
 
 GIT = shutil.which("git")
 GIT_ENV = {"GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid",
@@ -454,6 +455,60 @@ class Regressions(Base):
         (self.run_dir / "report.json").write_text(json.dumps(report))
         code, v = self.verify()
         self.assertEqual((code, v["items"]["V8"]["status"]), (1, "FAIL"))
+
+
+class InstalledSkill(unittest.TestCase):
+    # A copy installed inside the target, run from there, so its own folder lies inside the target.
+    skill_rel = ".claude/skills/anti-code-slop"
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
+        self.target = small_target(self.tmp, {"src/a.py": "x = 1  # noqa\n"})
+        self.skill = self.target / self.skill_rel
+        shutil.copytree(spec.SKILL_DIR, self.skill, ignore=shutil.ignore_patterns("tests", "__pycache__"))
+
+    def copy_gate(self, *args) -> subprocess.CompletedProcess:
+        script = self.skill / "scripts" / "slop_gate.py"
+        return subprocess.run([sys.executable, str(script), *map(str, args)], capture_output=True, text=True, env=env())
+
+    def test_allowed_covering_installed_skill_refused(self):
+        for n, allowed in enumerate([".", ".claude", self.skill_rel, self.skill_rel + "/scripts"]):
+            with self.subTest(allowed=allowed):
+                run_dir = self.tmp / f"refused-{n}"
+                proc = self.copy_gate("snapshot", "--target", self.target, "--run-dir", run_dir, "--allowed", allowed)
+                self.assertEqual(proc.returncode, 2, proc.stdout + proc.stderr)
+                self.assertIn("input error", proc.stderr)
+                self.assertIn(self.skill_rel, proc.stderr)
+                self.assertFalse(run_dir.exists())
+        for n, allowed in enumerate(["src", self.skill_rel + "-notes"]):
+            with self.subTest(allowed=allowed):
+                run_dir = self.tmp / f"accepted-{n}"
+                proc = self.copy_gate("snapshot", "--target", self.target, "--run-dir", run_dir, "--allowed", allowed)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    def test_installed_skill_edit_fails_v1(self):
+        run_dir = self.tmp / "run"
+        proc = self.copy_gate("snapshot", "--target", self.target, "--run-dir", run_dir, "--allowed", "src",
+                              "--fix-types", "lint-suppression", "--behavior-delegated", "unit test")
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        excluded = json.loads((run_dir / "scan_before.json").read_text())["files"]["excluded"]
+        self.assertEqual(excluded.get(self.skill_rel + "/SKILL.md"), "anti_code_slop_skill")
+        with open(self.skill / "SKILL.md", "a", encoding="utf-8") as handle:
+            handle.write("edited during the run\n")
+        (self.target / "src" / "a.py").write_text("x = 1\n")
+        basic_report(run_dir)
+        proc = self.copy_gate("verify", "--run-dir", run_dir)
+        v = latest_verdict(run_dir)
+        self.assertEqual((proc.returncode, v["result"], v["items"]["V1"]["status"]), (1, "INCOMPLETE", "FAIL"))
+        self.assertIn(f"changed outside allowed paths: {self.skill_rel}/SKILL.md", v["items"]["V1"]["reasons"])
+
+    def test_skill_folder_as_target_allowed(self):
+        run_dir = self.tmp / "self-run"
+        proc = self.copy_gate("snapshot", "--target", self.skill, "--run-dir", run_dir, "--allowed", ".")
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        checked = json.loads((run_dir / "scan_before.json").read_text())["files"]["checked"]
+        self.assertIn("scripts/slop_gate.py", checked)
 
 
 if __name__ == "__main__":

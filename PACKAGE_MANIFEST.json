@@ -36,9 +36,9 @@
     },
     {
       "path": "SKILL.md",
-      "bytes": 11974,
+      "bytes": 12044,
       "mode": "0644",
-      "sha256": "4149d90c2c80604bc17b78d87c81609e5657386e0a15262612ecedf72a108a66"
+      "sha256": "6d59af21d4da75dbbcc7658aa3ce485bdc1c974487288267b5d6d1563ac9d4af"
     },
     {
       "path": "references/adaptation.md",
@@ -78,9 +78,9 @@
     },
     {
       "path": "scripts/slop_gate.py",
-      "bytes": 32938,
+      "bytes": 33308,
       "mode": "0644",
-      "sha256": "849e4a6dacef1a7a09c6becdb6e71266b8da0de97f899f80c18761e8e4b19a63"
+      "sha256": "37be8debb06f3a8ceffdb60208007bdf4d1c5abd7cb7f29fa9be241fad31bab6"
     },
     {
       "path": "scripts/slop_scan.py",
@@ -450,9 +450,9 @@
     },
     {
       "path": "tests/required_tests.py",
-      "bytes": 2517,
+      "bytes": 2634,
       "mode": "0644",
-      "sha256": "8bf4f54c95ee2456307e787b70a327ccb5cc1f0b493d568e225f37e27f1a2845"
+      "sha256": "1f1895cfb7ea814b47f1cfcdd911694cf84792fd684ef93b4151d638dfcd3abc"
     },
     {
       "path": "tests/support.py",
@@ -486,9 +486,9 @@
     },
     {
       "path": "tests/test_verify.py",
-      "bytes": 22892,
+      "bytes": 26250,
       "mode": "0644",
-      "sha256": "085688207b8acec5e0b6bc2a74b8c5ae7236211e3345b3b4e4c3696ad9262476"
+      "sha256": "b5dd6a60a356fcc5011cae213d2ddbb1d2c3c7062d653fa53a6e98766d860136"
     },
     {
       "path": "tools/package_manifest.py",
