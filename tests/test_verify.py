@@ -173,6 +173,46 @@ class Judgment(Base):
         self.snapshot("--scope", "app", allowed=("other",), expect=2)
 
 
+class HashIntegrity(Base):
+    files = {"app/mod.py": "import hashlib\n\n\ndef same(a, b):\n    return hashlib.sha256(a).digest() == hashlib.sha256(b).digest()\n"}
+
+    def hash_signal(self):
+        return next(s for s in json.loads((self.run_dir / "scan_before.json").read_text())["signals"]
+                    if s["rule"] == "ANY-HASH-INTEGRITY")
+
+    def test_hash_integrity_kept_only_with_exception(self):
+        self.snapshot("--check", "true", fix_types=("hash-integrity",))
+        sig = self.hash_signal()
+        basic_report(self.run_dir)
+        code, v = self.verify()
+        self.assertEqual((code, v["items"]["V3"]["status"]), (1, "FAIL"))
+        keep = {"signal": sig["id"], "status": "justified_keep", "evidence": "e", "proposed_by": "structure",
+                "accepted_by": "main"}
+        basic_report(self.run_dir, dispositions=[{**keep, "exception": "allowed_suppression"}])
+        code, v = self.verify()
+        self.assertEqual((code, v["items"]["V8"]["status"]), (1, "FAIL"))
+        basic_report(self.run_dir, dispositions=[{**keep, "exception": "last_resort",
+                                                  "evidence": "no git and no original copy beside the target"}])
+        code, v = self.verify()
+        self.assertEqual(code, 0, v["items"])
+
+    def test_hash_integrity_fix_by_direct_comparison(self):
+        self.snapshot("--check", "true", fix_types=("hash-integrity",))
+        self.edit(text="import filecmp\n\n\ndef same(a, b):\n    return filecmp.cmp(a, b, shallow=False)\n")
+        basic_report(self.run_dir)
+        code, v = self.verify()
+        self.assertEqual(code, 0, v["items"])
+
+    def test_new_hash_in_a_fix_fails(self):
+        self.files = {"app/mod.py": "value = 1\n"}
+        self.target = small_target(self.tmp / "plain", self.files)
+        self.snapshot("--check", "true", fix_types=("hash-integrity",))
+        self.edit(text="import hashlib\n\nvalue = hashlib.sha256(b\"1\").hexdigest()\n")
+        basic_report(self.run_dir)
+        code, v = self.verify()
+        self.assertEqual((code, v["items"]["V4"]["status"]), (1, "FAIL"))
+
+
 class Groups(Base):
     files = {"app/pad.py": 'def pad(rows):\n    mark()\n    rows.append(1)  # noqa: E501\n    mark()\n'
                            '    rows.append(1)  # noqa: E501\n    mark()\n'}

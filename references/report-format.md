@@ -54,6 +54,7 @@
 | lint-suppression | `allowed_suppression`(스타일 전용·결함 규칙), `external_constraint` |
 | swallowed-error | `external_constraint` |
 | commented-code, banner-comment | 없음. 지우거나 `blocked` |
+| hash-integrity | `last_resort`(git도 직접 비교도 닿지 않음), `external_constraint`(외부 규격이 digest를 요구), `not_integrity`(무결성·일치 확인에 쓰지 않음). `evidence`에 git·직접 비교를 쓸 수 없는 이유를 적는다 |
 
 넓은 예외를 삼키는 코드에 정당한 이유가 있으면(소멸자나 종료 처리의 최선형 정리) 예외 형식을 좁혀 고친다. 좁힌 결과는 휴리스틱 신호라 판정만 받는다.
 

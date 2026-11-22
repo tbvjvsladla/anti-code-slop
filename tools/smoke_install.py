@@ -2,7 +2,8 @@
 """Install the package into a fresh project and drive one full gate round.
 
 For each install location (Claude Code `.claude/skills/`, Codex `.agents/skills/`):
-copy the package in, audit the whole project root (default scope), remove a block of
+copy the package in, check the copy against the manifest list and byte for byte against
+the package (no digests; once, an archive install of a tag is checked with `--against`), audit the whole project root (default scope), remove a block of
 commented-out code, write the reviews and the report, expect `verify` COMPLETE with
 the run folder outside the project, then `restore` and expect the original file back.
 Prints SMOKE-PASS on the last line when every step holds. Nothing outside a temporary
@@ -10,6 +11,7 @@ folder is written (XDG_STATE_HOME points inside it).
 """
 from __future__ import annotations
 
+import filecmp
 import json
 import os
 import shutil
@@ -52,6 +54,41 @@ def write_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, indent=1), encoding="utf-8")
 
 
+def check_against_tag(root: Path, skill: Path) -> None:
+    """An archive install of a tag passes `--check --against`, and one changed byte fails it."""
+    expect(shutil.which("git") is not None, "git is available (installs are checked with git)")
+    env = dict(os.environ, GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_NOSYSTEM="1",
+               GIT_AUTHOR_NAME="smoke", GIT_AUTHOR_EMAIL="smoke@example.invalid",
+               GIT_COMMITTER_NAME="smoke", GIT_COMMITTER_EMAIL="smoke@example.invalid")
+    repo = root / "release-repo"
+    shutil.copytree(skill, repo)
+
+    def git(*args: str, **kw) -> subprocess.CompletedProcess:
+        done = subprocess.run(["git", "-C", str(repo), *args], capture_output=True, env=env, **kw)
+        expect(done.returncode == 0, f"git {args[0]} in the release repository {done.stderr.decode(errors='replace').strip()}")
+        return done
+
+    git("init", "-q")
+    git("add", "-A")
+    git("commit", "-q", "-m", "release")
+    git("tag", "-a", "t1", "-m", "t1")
+    installed = root / "archive-install"
+    installed.mkdir()
+    archive = git("archive", "t1").stdout
+    untar = subprocess.run(["tar", "-x", "-C", str(installed)], input=archive, capture_output=True)
+    expect(untar.returncode == 0, "git archive t1 | tar -x makes an archive install")
+    tool = [sys.executable, "-B", str(skill / "tools" / "package_manifest.py"), "--check", "--root", str(installed),
+            "--against", str(repo), "--ref", "t1"]
+    proc = subprocess.run(tool, capture_output=True, text=True, env=env)
+    last = proc.stdout.strip().splitlines()[-1] if proc.stdout.strip() else proc.stderr.strip()
+    expect(proc.returncode == 0, f"--against agrees with the archive install ({last})")
+    target = installed / "SKILL.md"
+    target.write_bytes(target.read_bytes().replace(b"anti-code-slop", b"anti-code-sloq", 1))
+    proc = subprocess.run(tool, capture_output=True, text=True, env=env)
+    expect(proc.returncode == 1 and "differs from t1: SKILL.md" in proc.stdout,
+           "--against notices one changed byte with the size unchanged")
+
+
 def round_for(location: str, root: Path) -> None:
     print(f"[{location}]")
     project = root / "project"
@@ -66,7 +103,12 @@ def round_for(location: str, root: Path) -> None:
 
     manifest = subprocess.run([sys.executable, "-B", str(skill / "tools" / "package_manifest.py"), "--check",
                                "--root", str(skill)], capture_output=True, text=True)
-    expect(manifest.returncode == 0, "installed copy matches PACKAGE_MANIFEST.json")
+    expect(manifest.returncode == 0, "installed copy has the files and sizes PACKAGE_MANIFEST.json lists")
+    listed = json.loads((PACKAGE_ROOT / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))["files"]
+    expect(all(filecmp.cmp(PACKAGE_ROOT / f["path"], skill / f["path"], shallow=False) for f in listed),
+           "installed copy has the same bytes as the package (direct comparison, no digest)")
+    if location == "claude-code":
+        check_against_tag(root, skill)
 
     scan_out = root / "scan.json"
     proc = run_gate(gate, env, "scan", "--target", project, "--out", scan_out)

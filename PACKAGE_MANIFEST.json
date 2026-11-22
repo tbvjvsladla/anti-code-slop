@@ -1,512 +1,429 @@
 {
-  "manifest_version": "1.0.0",
+  "manifest_version": "2.0.0",
   "package": "anti-code-slop",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "inventory_excludes": [
     "PACKAGE_MANIFEST.json",
+    ".cache",
     ".git",
-    "__pycache__",
-    ".cache"
+    "__pycache__"
   ],
   "file_count": 83,
   "files": [
     {
       "path": ".gitattributes",
       "bytes": 19,
-      "mode": "0644",
-      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+      "mode": "0644"
     },
     {
       "path": ".gitignore",
       "bytes": 43,
-      "mode": "0644",
-      "sha256": "68159241f6a0cb33e4bc4c27893f14ad20eb20d8bc2c1a3c7b55af16c0e7dda3"
+      "mode": "0644"
     },
     {
       "path": "LICENSE",
       "bytes": 2564,
-      "mode": "0644",
-      "sha256": "0fea4bd710d9510a50295e2e6de1854f57655d859edf4eebdadce1f3eeea09bd"
+      "mode": "0644"
     },
     {
       "path": "README.md",
-      "bytes": 8246,
-      "mode": "0644",
-      "sha256": "157b29332e06a2dd07e431ee947cb3a14fa4b2d470d778e6290903dba1169fe2"
+      "bytes": 9222,
+      "mode": "0644"
     },
     {
       "path": "SKILL.md",
-      "bytes": 12044,
-      "mode": "0644",
-      "sha256": "6d59af21d4da75dbbcc7658aa3ce485bdc1c974487288267b5d6d1563ac9d4af"
+      "bytes": 15336,
+      "mode": "0644"
     },
     {
       "path": "references/adaptation.md",
-      "bytes": 2836,
-      "mode": "0644",
-      "sha256": "412b47bac41715319e5d4bde4e6aa1f17fcdcf84bf6ae2201ac04fbc91f8a7b8"
+      "bytes": 3307,
+      "mode": "0644"
     },
     {
       "path": "references/comment-review.md",
       "bytes": 4114,
-      "mode": "0644",
-      "sha256": "7a2434cec29fb27779adc60fcf53e4e41cbf0ee06f2e61340b305f28c3c18918"
+      "mode": "0644"
     },
     {
       "path": "references/prose-review.md",
-      "bytes": 3601,
-      "mode": "0644",
-      "sha256": "c53f23c611bf115194d5f8217d9a8104265fe29ab53ccaef2745b92c44c93cd7"
+      "bytes": 4116,
+      "mode": "0644"
     },
     {
       "path": "references/report-format.md",
-      "bytes": 6838,
-      "mode": "0644",
-      "sha256": "84a9f96965492cd475fa98d3e931422eda3d19451814ced09795d0f2985c054d"
+      "bytes": 7102,
+      "mode": "0644"
     },
     {
       "path": "references/structure-review.md",
-      "bytes": 3543,
-      "mode": "0644",
-      "sha256": "7a15750d47edd3ccfe1e79c9e05a2da9311a0613ff1d57fba50d2311111082b7"
+      "bytes": 4175,
+      "mode": "0644"
     },
     {
       "path": "scripts/rules.json",
-      "bytes": 24349,
-      "mode": "0644",
-      "sha256": "7215551a85439b2e7b827891a8c1fad2200738e33f71417b809bbe7623b9d7fd"
+      "bytes": 28227,
+      "mode": "0644"
     },
     {
       "path": "scripts/slop_gate.py",
       "bytes": 33308,
-      "mode": "0644",
-      "sha256": "37be8debb06f3a8ceffdb60208007bdf4d1c5abd7cb7f29fa9be241fad31bab6"
+      "mode": "0644"
     },
     {
       "path": "scripts/slop_scan.py",
       "bytes": 35744,
-      "mode": "0644",
-      "sha256": "fd29e484e9885e8b0383aaf6299089e99039ae03c62a7ee8e9e1a39df12b3e9c"
+      "mode": "0644"
     },
     {
       "path": "tests/acceptance_spec.py",
       "bytes": 1929,
-      "mode": "0644",
-      "sha256": "a0e440c87d242c8400f5a318a4150b6fd2902c8be30dc640e679060139842bd5"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/.gitignore",
       "bytes": 22,
-      "mode": "0644",
-      "sha256": "be7dfa5e83d24c14a6bd61666daad5f1112c42441f6d3158cf0740476c0b611e"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/config/app.toml",
       "bytes": 30,
-      "mode": "0644",
-      "sha256": "ad752e60fa36a94f4c659866257b8f43f4468c14d15a0efed2e4911d9931764a"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/docs/GUIDE.md",
       "bytes": 220,
-      "mode": "0644",
-      "sha256": "4950c8537636d762c89e12db8d21e66954ee43a151925ab0495513406de0db32"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/legacy/old.py",
       "bytes": 166,
-      "mode": "0644",
-      "sha256": "e56ad5a75266c5ef6e0a1485df08ea5bb366d0cd7fcba334b136e5d5559ee8e7"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/node/package.json",
       "bytes": 67,
-      "mode": "0644",
-      "sha256": "708712dfc079a3891810369c5001ba408339ea1be3cf7c36d78cba41f7d285d2"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/node/src/format.ts",
       "bytes": 169,
-      "mode": "0644",
-      "sha256": "906b8f390eb92efaaa6e492b61e0c777155484186cdb1ddf7fb473662ec4bdcb"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/node/src/retry.js",
       "bytes": 855,
-      "mode": "0644",
-      "sha256": "c76d6911a7decf75e397f9e4c9fdb7ef2fcd05dfa2935609df2401b7aba42f65"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/node/test/format.test.ts",
       "bytes": 198,
-      "mode": "0644",
-      "sha256": "c409969510285269d79a52cf0e6a3458f30082a53194b3ba6f0f61d40c67bb0c"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/node/test/retry.test.js",
       "bytes": 793,
-      "mode": "0644",
-      "sha256": "fbb8e349e0d8604187811d17ceaa2a1de21334fdf4e505f0f827e42251e9d554"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/python/app/__init__.py",
       "bytes": 0,
-      "mode": "0644",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/python/app/ledger.py",
       "bytes": 1785,
-      "mode": "0644",
-      "sha256": "f59d540781c789e6bb226062f8d3e1391b4fd99e187867ae796036d252e8ebf5"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/python/tests/__init__.py",
       "bytes": 0,
-      "mode": "0644",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/python/tests/test_ledger.py",
       "bytes": 1427,
-      "mode": "0644",
-      "sha256": "6409e1a211a83a005dcc381639e3941f6b2b5123c75a2300b5fab201d295c0d0"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/rust/Cargo.lock",
       "bytes": 150,
-      "mode": "0644",
-      "sha256": "cc0cc273b76855af9f4c64288947630e55b6d5b15451de4010e8f7a15f2e4be6"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/rust/Cargo.toml",
       "bytes": 88,
-      "mode": "0644",
-      "sha256": "531e97d6773b2f28808c8f70436dbdc7178aee24deb118f33c980e227f57041f"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/rust/src/lib.rs",
       "bytes": 968,
-      "mode": "0644",
-      "sha256": "3c25c5d6e5032c4aa6a24a9f5662e33dd36ff6995c7fe7a9aebc31f47f31fe83"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/rust/src/proto.rs",
       "bytes": 278,
-      "mode": "0644",
-      "sha256": "e2c1819951097517fc17b9f3e28119fbe69f4489d6b232bfe521db612b1198cc"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/rust/tests/wire.rs",
       "bytes": 748,
-      "mode": "0644",
-      "sha256": "929f42deb7cbcbb3401ba7c514dd98e04f6de0ebaa2dea6c3b1bd3262fd6d1b9"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/scripts/build.sh",
       "bytes": 301,
-      "mode": "0644",
-      "sha256": "7a490c3e4737a11701daad597ce8ec819faa0b00da0636c241b5d9787ddc758e"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/seeded/scripts/check.sh",
       "bytes": 239,
-      "mode": "0644",
-      "sha256": "6eaa7f7c805642a2ce6936e39f608caafc5f96be1149f8753cabd1e150711be7"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-behavior-node/files/node/src/retry.js",
       "bytes": 647,
-      "mode": "0644",
-      "sha256": "da9b64eac079e8e5189779f47514bb430cfa3fdfe8a2960af2ff10e32fa53577"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-behavior-node/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "10f5a331086fca418c1401edf4285ba902e5ff935fb15c01479f8e7b2f447c13"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-behavior/files/python/app/ledger.py",
       "bytes": 1681,
-      "mode": "0644",
-      "sha256": "55eaf717077ae88adfe7c6ba5ce48f46abbf2418ae8b7516bb25a4cf2a83c4b0"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-behavior/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "10f5a331086fca418c1401edf4285ba902e5ff935fb15c01479f8e7b2f447c13"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-blocked/variant.json",
       "bytes": 253,
-      "mode": "0644",
-      "sha256": "f8aae9622da3bc3dcf64614dec1c6c5723dfae829bc3413427342c8af7329645"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-constraint-approved-unreported/files/rust/src/lib.rs",
       "bytes": 680,
-      "mode": "0644",
-      "sha256": "f0abf82833a80f077da81205231fc92d5e341ea1d1385ef4c3c9afbf2fc3abe6"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-constraint-approved-unreported/variant.json",
       "bytes": 222,
-      "mode": "0644",
-      "sha256": "cca306a68db3ae4009076d5b7c303e847b077718943561e231c97fe0d2d3db04"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-increase/files/node/src/retry.js",
       "bytes": 767,
-      "mode": "0644",
-      "sha256": "ddf48ae1cb081c9ce3d8171a04c33907e9a962067026f63f321b983130e0ddde"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-increase/variant.json",
       "bytes": 162,
-      "mode": "0644",
-      "sha256": "1dc562be34b33e090091aaf6f053950328ad565ebde9aa1c8857e3993c3d4f2f"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-leftover/files/python/app/ledger.py",
       "bytes": 1704,
-      "mode": "0644",
-      "sha256": "3de8c76b70749c4a1d63c33a4126c1353c3d99dd0de32a96042a6a8eb21e4a26"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-leftover/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "0f87c6796cf7c038f0ebe90626342f4a2fa5db01c0db84215744b0b61ae86304"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-missing-verdict/variant.json",
       "bytes": 204,
-      "mode": "0644",
-      "sha256": "8d39ce3963ef2ddc93bf4fe448cd07625df1007a2b040bf6682f7a691346ef6b"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-no-diff-review/variant.json",
       "bytes": 175,
-      "mode": "0644",
-      "sha256": "922938c6702f0027b58bfeafa16a2cbb860273b34709b9a00a859d82fe4d8673"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-no-prose-review/variant.json",
       "bytes": 176,
-      "mode": "0644",
-      "sha256": "2a6dd3ef077cb507c6902538fa2921740ec53cd195ff285e4510780287556a76"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-protected/files/rust/src/lib.rs",
       "bytes": 680,
-      "mode": "0644",
-      "sha256": "f0abf82833a80f077da81205231fc92d5e341ea1d1385ef4c3c9afbf2fc3abe6"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-protected/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "0b731dc94b0c62359e079c5184630d2fe86562c95cd6db112ef6456120a0b846"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-rust-allow-only/files/rust/src/lib.rs",
       "bytes": 833,
-      "mode": "0644",
-      "sha256": "7a2418fd28c3191e1daac330357a3029dafea5362cb4816dacf4e01e52f19ff3"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-rust-allow-only/variant.json",
       "bytes": 95,
-      "mode": "0644",
-      "sha256": "6f4bb585e8b318d87b7f371f8ba7f284dff97cf3663a20f18d4c050c701c8514"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-scope/files/legacy/old.py",
       "bytes": 123,
-      "mode": "0644",
-      "sha256": "5fbe93590c9a0ed4afd907ef7eb0c620bc7645d9d7a49302ba9c2e3ad1251a75"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-scope/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "a11e1b6f670740dcd256d3e958548e0afe171040462d7e1e73e6d038aa966bc5"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-swapped-keep-same-context/files/python/app/padding.py",
       "bytes": 320,
-      "mode": "0644",
-      "sha256": "fbaa85945afb06f220b44b8d8e0fb268cf0ef593af5bf7e87ef49dfe0302a3d8"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-swapped-keep-same-context/pre/python/app/padding.py",
       "bytes": 334,
-      "mode": "0644",
-      "sha256": "00e7cd10233de63bf51a1e23867da7901c7ec8c0cac652c3b7a4219e5175ad44"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-swapped-keep-same-context/variant.json",
       "bytes": 819,
-      "mode": "0644",
-      "sha256": "73d6ebc82f4631ae7f0f5efe4b8984cf8e61f466e3450ba2215f97156457456c"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-swapped-keep/files/rust/src/proto.rs",
       "bytes": 249,
-      "mode": "0644",
-      "sha256": "209f4036fd6577b349506c919175652bd9fc4e4affea4019e59174e0f3b4d92c"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-swapped-keep/variant.json",
       "bytes": 175,
-      "mode": "0644",
-      "sha256": "ce3f7641f3cad8debd26d45f3cef9009a900bf11a0bdde4d18e4edc5d50599e7"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-weakened-test/files/python/tests/test_ledger.py",
       "bytes": 1405,
-      "mode": "0644",
-      "sha256": "9437cb0e185145f8a9f9dea65d91c0d8859ae911dbcb97bdad7fcf1c50c987d8"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-weakened-test/variant.json",
       "bytes": 72,
-      "mode": "0644",
-      "sha256": "a11e1b6f670740dcd256d3e958548e0afe171040462d7e1e73e6d038aa966bc5"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-wrong-exception/files/rust/src/lib.rs",
       "bytes": 833,
-      "mode": "0644",
-      "sha256": "d5d9b476a22cc3418caf807447b5b3cccf0b0fe15c6e1b08b7617321348bfbc1"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/bad-wrong-exception/variant.json",
       "bytes": 452,
-      "mode": "0644",
-      "sha256": "cf8828fd34367a02d6b9aefd3c768bc389a43bc775199b3185bf97812d6c316d"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good-constraint-approved/files/rust/src/lib.rs",
       "bytes": 680,
-      "mode": "0644",
-      "sha256": "f0abf82833a80f077da81205231fc92d5e341ea1d1385ef4c3c9afbf2fc3abe6"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good-constraint-approved/variant.json",
       "bytes": 423,
-      "mode": "0644",
-      "sha256": "c8fefb6173e9899334562857a305a6dfa842e7ba55eaae980976b2d5d8ba845c"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/files/node/src/format.ts",
       "bytes": 153,
-      "mode": "0644",
-      "sha256": "da32b3fb401bb9b0ed01e59c75be6182b79add14862c95e24af8f6b6bf0adeb9"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/files/node/src/retry.js",
       "bytes": 665,
-      "mode": "0644",
-      "sha256": "a760e2b6692a56026992a0aac985fb36225bbae8d287a2263833751bb64483ce"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/files/python/app/ledger.py",
       "bytes": 1679,
-      "mode": "0644",
-      "sha256": "5a61cad008b979750784b97f6502b9516594b3b23864d13d20fc8bf8b0ca0685"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/files/rust/src/lib.rs",
       "bytes": 771,
-      "mode": "0644",
-      "sha256": "a7294f4b88449701caa1d81c8e26c237859fded866f2dabc5d8ef32660245afc"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/files/scripts/build.sh",
       "bytes": 228,
-      "mode": "0644",
-      "sha256": "c36dfb6bc0a6c9be01465115c279a08a1a88658c761c8b1da0b0a3d37898c164"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/report.json",
       "bytes": 1262,
-      "mode": "0644",
-      "sha256": "050e133b5bc9391355f7da5c7648dfbef83460600f99765098de092ce327b651"
+      "mode": "0644"
     },
     {
       "path": "tests/fixtures/acceptance/variants/good/variant.json",
       "bytes": 40,
-      "mode": "0644",
-      "sha256": "1f29f62ca385d63771d435cbd6b0c833c399c3a85eafebaa12e9f3bd7c12f1ec"
+      "mode": "0644"
     },
     {
       "path": "tests/judge_acceptance.py",
       "bytes": 11162,
-      "mode": "0644",
-      "sha256": "a201999b7e42fabd67606e5368beea4e65c8737b5e58afb71d136ff0e65326e4"
+      "mode": "0644"
     },
     {
       "path": "tests/required_tests.py",
-      "bytes": 2634,
-      "mode": "0644",
-      "sha256": "1f1895cfb7ea814b47f1cfcdd911694cf84792fd684ef93b4151d638dfcd3abc"
+      "bytes": 2753,
+      "mode": "0644"
     },
     {
       "path": "tests/support.py",
       "bytes": 6611,
-      "mode": "0644",
-      "sha256": "2d65a8c4d5719be1f87475edcc17b2dc76cafcf7f10168ce056f484e6a483ec5"
+      "mode": "0644"
     },
     {
       "path": "tests/test_acceptance_fixture.py",
       "bytes": 6669,
-      "mode": "0644",
-      "sha256": "b5805af80146024a987a18b4060b28f184939f43df84680fefc685c323959c61"
+      "mode": "0644"
     },
     {
       "path": "tests/test_restore.py",
       "bytes": 2895,
-      "mode": "0644",
-      "sha256": "24c1256a15874489748525b770415f7ba73f6224ca473affd2468913274f23d5"
+      "mode": "0644"
     },
     {
       "path": "tests/test_rules.py",
       "bytes": 4036,
-      "mode": "0644",
-      "sha256": "a6ebbaedd6f40ee6bcba8acc27bd5c3c8fca97f7cce21654ac2dcfe88fc3ab24"
+      "mode": "0644"
     },
     {
       "path": "tests/test_scan.py",
       "bytes": 8560,
-      "mode": "0644",
-      "sha256": "4e8bc59629c9585b8ea0a14cd112b58ceaf7b2ca9015fd9e1503dd72d679e1c0"
+      "mode": "0644"
     },
     {
       "path": "tests/test_verify.py",
-      "bytes": 26250,
-      "mode": "0644",
-      "sha256": "b5dd6a60a356fcc5011cae213d2ddbb1d2c3c7062d653fa53a6e98766d860136"
+      "bytes": 28359,
+      "mode": "0644"
     },
     {
       "path": "tools/package_manifest.py",
-      "bytes": 3289,
-      "mode": "0644",
-      "sha256": "d0ac4a95c42d802a78ba61ce45ffb0476c172e09a0bd44c3fa21ee3e479b5b90"
+      "bytes": 5634,
+      "mode": "0644"
     },
     {
       "path": "tools/sanitize_check.py",
       "bytes": 2099,
-      "mode": "0644",
-      "sha256": "07c670c50404dcd4a3baee97d8eeca546c09dfda4be2f9c226ab1a99981d3bd9"
+      "mode": "0644"
     },
     {
       "path": "tools/smoke_install.py",
-      "bytes": 5284,
-      "mode": "0644",
-      "sha256": "8d45c8af5dbd22121bc915e82c91ecefdae5c30ee377bafe127e4798facc6061"
+      "bytes": 7926,
+      "mode": "0644"
     }
   ]
 }
