@@ -2,7 +2,7 @@
 
 > **AI가 남긴 코드 슬롭을 찾고, 맡긴 범위 안에서만 고치고, 완료 여부를 산문이 아니라 스크립트의 종료 코드로 판정하는 에이전트 스킬입니다.**
 >
-> 배포 버전 **1.1.0** · Python 3 표준 라이브러리만 사용 · Claude Code와 Codex 프로젝트 스킬용 폴더 패키지 · MIT
+> 배포 버전 **1.2.0** · Python 3 표준 라이브러리만 사용 · Claude Code와 Codex 프로젝트 스킬용 폴더 패키지 · MIT
 
 ## 해결하려는 문제
 
@@ -18,10 +18,10 @@ anti-code-slop은 이 문제를 **결정론 판정**과 **읽기 전용 검토�
 
 | 부분 | 하는 일 |
 |---|---|
-| `scripts/slop_scan.py`, `scripts/rules.json` | 언어별 어휘 분석으로 슬롭 신호를 찾습니다. 같은 입력이면 어느 환경에서나 같은 결과입니다. Python, Rust, JavaScript/TypeScript, 셸, 산문(`.md` 등)을 다룹니다 |
+| `scripts/slop_scan.py`, `scripts/rules.json` | 언어별 어휘 분석으로 슬롭 신호를 찾습니다. 같은 입력이면 어느 환경에서나 같은 결과입니다. Python, Rust, JavaScript/TypeScript, 셸, 산문(`.md` 등)을 다룹니다. `rules.json`의 `reviewers`가 어느 검토자를 언제 부를지 선언합니다 |
 | `scripts/slop_gate.py` | `scan`, `snapshot`, `verify`, `restore`. 수정 전후를 비교해 V1~V8을 판정하고 `COMPLETE`(종료 0) 또는 `INCOMPLETE`(종료 1)를 냅니다 |
-| `references/` | 주석·구조·산문 검토자의 역할 지침, 보고서 형식, 출처 기록 |
-| `SKILL.md` | 에이전트가 읽는 절차서. 입력, 절차 8단계, 판정 기준, 반환 형식 |
+| `references/` | 주석·구조·산문·무결성 검토자의 역할 지침(판정 기준의 정본), 보고서 형식, 출처 기록 |
+| `SKILL.md` | 에이전트가 읽는 절차서. 입력, 수정 유형과 검토자 표, 절차 8단계, 판정 기준, 반환 형식. 판정 기준의 세부는 references로 보냅니다 |
 
 판정이 막는 것: 허용 경로 밖 수정, 교정 중에 새로 만든 해시 코드, 보호 주석(라이선스 헤더, 공개 API 문서, 이슈 링크) 삭제, 확정 신호 증가, 스캐너 회피 표현, 근거 없는 보존, 동작 검사 실패·약화, 신고 없는 파일 삭제. 자세한 기준은 [SKILL.md](SKILL.md)와 [보고서 형식](references/report-format.md)에 있습니다.
 
@@ -42,22 +42,22 @@ anti-code-slop은 이 문제를 **결정론 판정**과 **읽기 전용 검토�
 
 ```bash
 # 저장소에서 (예: Claude Code)
-git clone --branch v1.1.0 <이 저장소 URL> .claude/skills/anti-code-slop
+git clone --branch v1.2.0 <이 저장소 URL> .claude/skills/anti-code-slop
 
 # 또는 태그 아카이브로
 mkdir -p .claude/skills/anti-code-slop
-git -C <받은 저장소> archive v1.1.0 | tar -x -C .claude/skills/anti-code-slop
+git -C <받은 저장소> archive v1.2.0 | tar -x -C .claude/skills/anti-code-slop
 
-# 설치본 확인: clone으로 받았으면 git으로 (빈 출력, 그리고 v1.1.0)
+# 설치본 확인: clone으로 받았으면 git으로 (빈 출력, 그리고 v1.2.0)
 git -C .claude/skills/anti-code-slop status --porcelain
 git -C .claude/skills/anti-code-slop describe --tags --exact-match
 
 # 설치본 확인: 아카이브로 받았으면 받은 저장소의 태그와 바이트를 직접 비교
 python3 -B .claude/skills/anti-code-slop/tools/package_manifest.py --check \
-  --root .claude/skills/anti-code-slop --against <받은 저장소> --ref v1.1.0
+  --root .claude/skills/anti-code-slop --against <받은 저장소> --ref v1.2.0
 ```
 
-`PACKAGE_MANIFEST.json`은 패키지를 이루는 파일의 목록·크기·모드만 적습니다. digest는 적지 않습니다. 파일이 그대로인지는 git이나 태그 blob과의 직접 비교로 확인합니다(SKILL.md 「무결성·일치 검증」).
+`PACKAGE_MANIFEST.json`은 패키지를 이루는 파일의 목록·크기·모드만 적습니다. digest는 적지 않습니다. 파일이 그대로인지는 git이나 태그 blob과의 직접 비교로 확인합니다(`references/integrity-review.md` 규칙 2·3).
 
 두 하네스를 함께 쓰면 한 자리에 두고 다른 자리는 심볼릭 링크로 가리키면 됩니다. 두 자리에 실제 복사본을 따로 두면, 실행하지 않은 쪽 복사본은 프로젝트의 일부로 스캔됩니다.
 
